@@ -27,7 +27,9 @@ const DropDownStations = (props) => {
                         <br />
                         <Button variant='primary' onClick={props.onClick}>Get drought prediction</Button>
                     </Col>
-                    <Col />
+                    <Col>
+                            {props.map}
+                    </Col>
                 </Row>
             </Container>
         </>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AppBar from "../Components/AppBar";
 import DropDownStations from '../Components/DropDownStations';
+import Map from '../Components/Map'
 import { getAvailableStation, getPrediction } from "../Services/demoServices";
 
 const Demo = () => {
@@ -38,7 +39,7 @@ const Demo = () => {
     return (
         <>
             <AppBar />
-            <DropDownStations arrayStations={availableStations} onChange={handleChangeDropDown} onClick={handleClickDropDown}/>
+            <DropDownStations arrayStations={availableStations} onChange={handleChangeDropDown} onClick={handleClickDropDown} map={<Map/>}/>
         </>
     )
 }
