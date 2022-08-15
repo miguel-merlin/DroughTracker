@@ -1,6 +1,7 @@
 import axios from "../Api/axiosML";
 
 const GET_STATIONS = ""
+const GET_PRED = ""
 
 
 const getAvailableStation = async () => {
@@ -13,6 +14,23 @@ const getAvailableStation = async () => {
         })
 }
 
+const getPrediction = async (id) => {
+    await axios.get(GET_PRED, JSON.stringify({
+        _id: id,
+    }), {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(function (response) {
+            return response
+        })
+        .catch(function (error) {
+            return error
+        })
+}
+
 export {
-    getAvailableStation
+    getAvailableStation,
+    getPrediction,
 }
