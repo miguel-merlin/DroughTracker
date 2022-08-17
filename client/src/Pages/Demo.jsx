@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, } from 'react';
 import AppBar from "../Components/AppBar";
 import DropDownDemo from '../Components/DropDownDemo';
-import Map from '../Components/Map'
+//import Map from '../Components/Map'
+import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container'
 import { getAvailableStation, getPrediction, getAvailableStates } from "../Services/demoServices";
 
 const Demo = () => {
     const [availableStates, setAvailableStates] = useState([]);
     const [availableStations, setAvailableStations] = useState([]);
     const [stationState, setStationState] = useState(undefined);
-    const [stationId, setStationId] = useState('')
+    const [stationId, setStationId] = useState(undefined)
     const [errMsg, setErrMsg] = useState('')
 
     const handleChangeDropDownStates = (event) => {
@@ -18,11 +22,16 @@ const Demo = () => {
 
     const handleChangeDropDownStations = (event) => {
         event.preventDefault();
-        var id = event.target.value._id
+        var id;
+        availableStations.forEach((station) => {
+            if (station.name === event.target.value) {
+                id = station.id
+            }
+        })
         setStationId(id)
     }
 
-    const handleClickDropDown = () => {
+    const handleClickPredict = () => {
         getPrediction(stationId)
             .catch(function (error) {
                 setErrMsg("An error ocurred")
@@ -48,16 +57,29 @@ const Demo = () => {
                 })
             })
             .catch(function (error) {
-                setErrMsg("No se pudieron actualizar las estaciones")
+                setErrMsg("Error: Stations could not be loaded")
             })
     }, [stationState])
 
     return (
         <>
             <AppBar />
-            <DropDownDemo firstMessage={"Select a state"} array={availableStates} errMsg={errMsg} onChange={handleChangeDropDownStates} />
-            <br />
-            <DropDownDemo firstMessage={"Select a weather station"} array={availableStations.map(a => a.name)} errMsg={errMsg} onChange={handleChangeDropDownStations} />
+            <Container>
+                <Row>
+                    <Col>
+                        <Row>
+                            <DropDownDemo firstMessage={"Select a state"} array={availableStates} errMsg={errMsg} onChange={handleChangeDropDownStates} />
+                        </Row>
+                        <Row>
+                            <DropDownDemo firstMessage={"Select a weather station"} array={availableStations.map(a => a.name)} errMsg={errMsg} onChange={handleChangeDropDownStations} />
+                        </Row>
+                        <Button onClick={handleClickPredict}>Predict!</Button>
+                    </Col>
+                    <Col>
+                        {/* <Map /> */}
+                    </Col>
+                </Row>
+            </Container>
         </>
     )
 }

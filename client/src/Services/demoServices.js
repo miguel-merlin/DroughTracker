@@ -2,7 +2,7 @@ import axios from "../Api/axiosML";
 
 const GET_STATES = "/station/states";
 const GET_STATIONS = "/station/stations";
-const GET_PRED = "station/prediction";
+const GET_PRED = "/station/prediction";
 
 const getAvailableStates = async () => {
   try {
@@ -16,7 +16,6 @@ const getAvailableStates = async () => {
 const getAvailableStation = async (state) => {
   try {
     const response = await axios.get(`${GET_STATIONS}/${state}`);
-    console.log(response)
     return response;
   } catch (error) {
     return error;
@@ -27,9 +26,6 @@ const getPrediction = async (id) => {
   await axios
     .get(
       `${GET_PRED}/${id}`,
-      JSON.stringify({
-        _id: id,
-      }),
       {
         headers: {
           "Content-Type": "application/json",
@@ -37,6 +33,7 @@ const getPrediction = async (id) => {
       }
     )
     .then(function (response) {
+        console.log(response)
       return response;
     })
     .catch(function (error) {
