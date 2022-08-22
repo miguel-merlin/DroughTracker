@@ -8,7 +8,7 @@ import img3 from '../Assets/imgs/drought3.jpg';
 const CarouselDrought = () => {
     return (
         <Carousel fade>
-            <Carousel.Item>
+            <Carousel.Item interval={1000}>
                 <img
                     className='d-block w-100'
                     src={img1}
@@ -20,7 +20,7 @@ const CarouselDrought = () => {
                     </Card>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item>
+            <Carousel.Item interval={1000}>
                 <img
                     className='d-block w-100'
                     src={img2}
@@ -32,7 +32,7 @@ const CarouselDrought = () => {
                     </Card>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item>
+            <Carousel.Item interval={1000}>
                 <img
                     className='d-block w-100'
                     src={img3}
